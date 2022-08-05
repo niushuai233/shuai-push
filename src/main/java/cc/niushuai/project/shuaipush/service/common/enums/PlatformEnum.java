@@ -3,12 +3,12 @@ package cc.niushuai.project.shuaipush.service.common.enums;
 import cc.niushuai.project.shuaipush.common.base.BaseEnum;
 
 /**
- * 消息类型
+ * 推送平台
  *
  * @author niushuai
  * @date 2022/8/5 9:49
  */
-public enum MessageTypeEnum implements BaseEnum<String, MessageTypeEnum> {
+public enum PlatformEnum implements BaseEnum<String, PlatformEnum> {
     /**
      * QQ频道
      */
@@ -31,7 +31,7 @@ public enum MessageTypeEnum implements BaseEnum<String, MessageTypeEnum> {
      */
     private String desc;
 
-    MessageTypeEnum(String value, String desc) {
+    PlatformEnum(String value, String desc) {
         this.value = value;
         this.desc = desc;
     }
