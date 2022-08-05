@@ -15,23 +15,28 @@ public class CustomClientHttpRequestInterceptor implements ClientHttpRequestInte
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        logRequestDetails(request);
+        traceRequest(request, body);
         ClientHttpResponse httpResponse = execution.execute(request, body);
-        logResponseDetails(httpResponse);
+        traceResponse(httpResponse);
         return httpResponse;
     }
 
-    private void logRequestDetails(HttpRequest request) {
-        log.debug("Headers: {}", request.getHeaders());
-        log.debug("Request Method: {}", request.getMethod());
-        log.debug("Request URI: {}", request.getURI());
+    private void traceRequest(HttpRequest request, byte[] body) {
+        log.debug("===========================request begin================================================");
+        log.debug("URI         : {}", request.getURI());
+        log.debug("Method      : {}", request.getMethod());
+        log.debug("Headers     : {}", request.getHeaders());
+        log.debug("Request body: {}", IoUtil.readUtf8(IoUtil.toStream(body)));
+        log.debug("==========================request end================================================");
     }
 
     @SneakyThrows
-    private void logResponseDetails(ClientHttpResponse response) {
-        log.debug("Status Code: {}", response.getRawStatusCode());
-        log.debug("Status Text: {}", response.getStatusText());
-        log.debug("Response Body: {}", IoUtil.readUtf8(response.getBody()));
+    private void traceResponse(ClientHttpResponse response) {
+        log.debug("============================response begin==========================================");
+        log.debug("Status code  : {}", response.getStatusCode());
+        log.debug("Status text  : {}", response.getStatusText());
+        log.debug("Headers      : {}", response.getHeaders());
+        log.debug("Response body: {}", IoUtil.readUtf8(response.getBody()));
+        log.debug("=======================response end=================================================");
     }
-
 }
