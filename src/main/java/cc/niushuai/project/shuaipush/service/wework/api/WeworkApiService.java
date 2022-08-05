@@ -10,6 +10,8 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static cc.niushuai.project.shuaipush.service.common.ApiConstant.Wework.Keys.WEWORK_ACCESS_TOKEN;
+
 
 /**
  * 企业微信Api服务
@@ -21,7 +23,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class WeworkApiService {
 
-    public static final String WEWORK_ACCESS_TOKEN = "wework_access_token";
 
     /**
      * 获取access_token

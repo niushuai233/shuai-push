@@ -28,6 +28,14 @@ public interface ApiConstant {
          */
         String Api_Base_Url = "https://qyapi.weixin.qq.com/cgi-bin";
 
+
+        interface Keys {
+            /**
+             * 缓存key
+             */
+            String WEWORK_ACCESS_TOKEN = "wework_access_token";
+        }
+
         /**
          * 认证相关
          */
