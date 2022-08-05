@@ -2,6 +2,7 @@ package cc.niushuai.project.shuaipush.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -33,8 +34,7 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(factory);
+        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(factory));
         // 替换原有的字符串解析为utf8编码
         List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
         Iterator<HttpMessageConverter<?>> iterator = messageConverters.iterator();
@@ -45,6 +45,7 @@ public class RestTemplateConfig {
         }
 
         messageConverters.add(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+        restTemplate.getInterceptors().add(new CustomClientHttpRequestInterceptor());
         return restTemplate;
     }
 }
