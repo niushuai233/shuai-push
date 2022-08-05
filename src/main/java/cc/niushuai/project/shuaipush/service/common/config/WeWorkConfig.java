@@ -1,16 +1,12 @@
 package cc.niushuai.project.shuaipush.service.common.config;
 
 import cc.niushuai.project.shuaipush.common.exception.BusinessException;
-import cn.hutool.extra.spring.SpringUtil;
+import cc.niushuai.project.shuaipush.common.util.ValidatorUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import javax.validation.constraints.NotBlank;
-import javax.validation.groups.Default;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * 加载企业微信配置
@@ -37,10 +33,9 @@ public class WeWorkConfig {
      * @date: 2022/8/5 14:01
      */
     public void verify() {
-        Set<ConstraintViolation<WeWorkConfig>> validate = SpringUtil.getBean(Validator.class).validate(this, Default.class);
-        if (!validate.isEmpty()) {
-            String errMsg = validate.stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(","));
-            throw new BusinessException(errMsg);
+        String validate = ValidatorUtil.validate(this);
+        if (StrUtil.isNotEmpty(validate)) {
+            throw new BusinessException(validate);
         }
     }
 }
