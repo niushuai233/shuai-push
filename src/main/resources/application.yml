@@ -26,10 +26,10 @@ spring:
 
 # 自定义配置
 push:
-  sendKey: ${default:sendKey}
+  sendKey: ${sendKey:}
   wework:
     # 企业id
-    corpId: ${corpId:corpId}
-    corpSecret: ${corpId:corpId}
-    appId: ${corpId:corpId}
-    toUid: ${corpId:corpId}
+    corpId: ${corpId:}
+    corpSecret: ${corpSecret:}
+    appId: ${appId:}
+    toUser: ${toUser:}
