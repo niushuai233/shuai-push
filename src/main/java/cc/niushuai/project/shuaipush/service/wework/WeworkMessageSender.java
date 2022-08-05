@@ -2,7 +2,11 @@ package cc.niushuai.project.shuaipush.service.wework;
 
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSender;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
+import cc.niushuai.project.shuaipush.service.wework.api.WeworkApiService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 企业微信应用消息推送
@@ -10,8 +14,12 @@ import org.springframework.stereotype.Component;
  * @author niushuai
  * @date 2022/8/5 11:41
  */
+@Slf4j
 @Component
-public class WeWorkMessageSender implements MessageSender {
+public class WeworkMessageSender implements MessageSender {
+
+    @Resource
+    private WeworkApiService weworkApiService;
 
     /**
      * 发送消息
@@ -22,6 +30,8 @@ public class WeWorkMessageSender implements MessageSender {
      */
     @Override
     public void send(MessageVO message) {
+
+        weworkApiService.sendAppMessage(message);
 
     }
 }

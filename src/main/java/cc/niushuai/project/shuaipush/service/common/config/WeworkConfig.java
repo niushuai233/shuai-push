@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @Accessors(chain = true)
-public class WeWorkConfig {
+public class WeworkConfig {
 
     @NotBlank(message = "企业ID不能为空")
     private String corpId;

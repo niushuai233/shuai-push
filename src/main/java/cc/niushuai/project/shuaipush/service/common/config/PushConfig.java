@@ -22,7 +22,7 @@ public class PushConfig {
 
     private String sendKey;
 
-    private WeWorkConfig wework;
+    private WeworkConfig wework;
 
     @PostConstruct
     public void init() {
