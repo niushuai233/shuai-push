@@ -1,6 +1,11 @@
 server:
   port: 8080
 
+logging:
+  level:
+    root: info
+    cc.niushuai: debug
+
 spring:
   datasource:
     url: jdbc:h2:file:./shuai-push
@@ -33,3 +38,4 @@ push:
     corpSecret: ${corpSecret:}
     appId: ${appId:}
     toUser: ${toUser:}
+
