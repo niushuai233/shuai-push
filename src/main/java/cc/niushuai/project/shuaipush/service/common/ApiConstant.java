@@ -34,6 +34,7 @@ public interface ApiConstant {
              * 缓存key
              */
             String WEWORK_ACCESS_TOKEN = "wework_access_token";
+            String ALL_USER = "@all";
         }
 
         /**
@@ -73,6 +74,6 @@ public interface ApiConstant {
         }
         WeworkConfig wework = SpringUtil.getBean(PushConfig.class).getWework();
         return Wework.Api_Base_Url + url.replace(CORP_ID, wework.getCorpId()).replace(CORP_SECRET, wework.getCorpSecret())
-                .replace(CORP_APP_ID, wework.getAppId());
+                .replace(CORP_APP_ID, wework.getAppId().toString());
     }
 }

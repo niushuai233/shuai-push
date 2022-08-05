@@ -6,7 +6,8 @@ import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 加载企业微信配置
@@ -18,12 +19,12 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class WeworkConfig {
 
-    @NotBlank(message = "企业ID不能为空")
+    @NotEmpty(message = "企业ID不能为空")
     private String corpId;
-    @NotBlank(message = "企业秘钥不能为空")
+    @NotEmpty(message = "企业秘钥不能为空")
     private String corpSecret;
-    @NotBlank(message = "企业应用ID不能为空")
-    private String appId;
+    @NotNull(message = "企业应用ID不能为空")
+    private Long appId;
     private String toUser;
 
     /**

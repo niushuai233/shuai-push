@@ -14,6 +14,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class WeworkResp {
 
+    @JsonProperty("msgid")
+    private String msgId;
+
     @JsonProperty("errcode")
     private Long errorCode;
 

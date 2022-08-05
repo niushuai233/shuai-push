@@ -2,6 +2,8 @@ package cc.niushuai.project.shuaipush.common.util;
 
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -26,5 +28,11 @@ public class RestTemplateUtil {
 
     public static <T> T post(String url, Object request, Class<T> clazz) {
         return restTemplate.postForObject(url, request, clazz);
+    }
+
+    public static <T> T postJson(String url, Object request, Class<T> clazz) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("content-type", "application/json");
+        return restTemplate.postForObject(url, new HttpEntity<>(request, headers), clazz);
     }
 }
