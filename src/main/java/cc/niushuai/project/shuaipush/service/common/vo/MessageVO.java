@@ -1,5 +1,6 @@
 package cc.niushuai.project.shuaipush.service.common.vo;
 
+import cc.niushuai.project.shuaipush.service.common.enums.MessageTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,12 +23,11 @@ public class MessageVO {
     private String platform;
 
     /**
-     * 消息类型
+     * 消息类型 默认为text
      *
      * @see
      */
-    @NotBlank(message = "msgType 消息类型不能为空")
-    private String msgType;
+    private String messageType = MessageTypeEnum.Text.getValue();
 
     /**
      * 消息内容
@@ -36,8 +36,7 @@ public class MessageVO {
     private String message;
 
     /**
-     * 接收人 所有人为 @all
+     * 接收人 默认为@all
      */
-    @NotBlank(message = "toUid 接收人不能为空")
-    private String toUid;
+    private String toUser = "@all";
 }
