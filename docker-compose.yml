@@ -1,0 +1,17 @@
+version: '3'
+services:
+  shuai-push:
+    restart: always
+    image: niushuai.cc/project/shuai-push:1.0
+    container_name: shuai-push
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/data
+      - ./logs/:/nti56.com/logs
+    environment:
+      - sendKey: sendKey;
+      - corpId: corpId;
+      - corpSecret: corpSecret;
+      - appId: appId
+      - LOG_PATH: .
