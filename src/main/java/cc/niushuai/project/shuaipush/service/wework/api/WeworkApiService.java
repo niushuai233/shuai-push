@@ -43,9 +43,6 @@ public class WeworkApiService {
      */
     public String getToken() {
 
-        if (1 < 2) {
-            return "sBeWc1JRap0qjXXpQkhbd2vsUNTtbqohAXA1Hn2ylv3D5v0v6wls8JYiy_p1G_uBMkoJpqZyNMy8zkiATwgxWScT5sfIRKXAMOFEczqusld6PPiWK68Aj1iH_SdkVv4uPgmLdO29M4YvV4fbTXciTSv8Lyz_6RSe0FWovYkONjMwppeS_xiTgAkYyFUr5MvjY-czYGveE0YW5VxfX3U1zQ";
-        }
         // 从缓存取
         String accessToken = (String) CacheManager.getDefault().get(Keys.WEWORK_ACCESS_TOKEN);
         if (StrUtil.isNotEmpty(accessToken)) {
