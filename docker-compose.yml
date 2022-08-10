@@ -2,13 +2,13 @@ version: '3'
 services:
   shuai-push:
     restart: always
-    image: niushuai.cc/project/shuai-push:${version:latest}
+    image: niushuai.cc/project/shuai-push:${version}
     container_name: shuai-push
     ports:
-      - ${EXPORT_PORT:8080}:8080
+      - ${EXPORT_PORT}:8080
     environment:
-      - sendKey: ${SEND_KEY:sendKey}
-      - corpId: ${CORP_ID:corpId}
-      - corpSecret: ${CORP_SECRET:corpSecret}
-      - appId: ${APP_ID:appId}
-      - LOG_PATH: ${LOG_PATH:.}
+      sendKey: ${SEND_KEY}
+      corpId: ${CORP_ID}
+      corpSecret: ${CORP_SECRET}
+      appId: ${APP_ID}
+      LOG_PATH: ${LOG_PATH}
