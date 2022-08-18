@@ -2,8 +2,8 @@ version: '3'
 services:
   shuai-push:
     restart: always
-    image: niushuai.cc/project/shuai-push:${version}
-    container_name: shuai-push
+    image: niushuai233/shuai-push:${version}
+    container_name: shuai-push-${version}
     ports:
       - ${EXPORT_PORT}:8080
     environment:
