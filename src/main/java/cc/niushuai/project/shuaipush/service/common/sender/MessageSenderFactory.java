@@ -2,6 +2,7 @@ package cc.niushuai.project.shuaipush.service.common.sender;
 
 import cc.niushuai.project.shuaipush.common.base.BaseEnum;
 import cc.niushuai.project.shuaipush.common.exception.BusinessException;
+import cc.niushuai.project.shuaipush.service.AllMessageSender;
 import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
 import cc.niushuai.project.shuaipush.service.wework.WeworkMessageSender;
 import cn.hutool.extra.spring.SpringUtil;
@@ -24,6 +25,11 @@ public class MessageSenderFactory {
 
     static {
         put(PlatformEnum.Wework, WeworkMessageSender.class);
+        put(PlatformEnum.ALL, AllMessageSender.class);
+    }
+
+    public static Map<PlatformEnum, MessageSender> senders() {
+        return senders;
     }
 
     /**
@@ -36,7 +42,7 @@ public class MessageSenderFactory {
      */
     private static void put(PlatformEnum platformEnum, Class<? extends MessageSender> messageSenderClass) {
         log.info("加载推送平台实例: {} --> {}", platformEnum.getDesc(), messageSenderClass);
-        senders.put(PlatformEnum.Wework, SpringUtil.getBean(messageSenderClass));
+        senders.put(platformEnum, SpringUtil.getBean(messageSenderClass));
     }
 
     /**

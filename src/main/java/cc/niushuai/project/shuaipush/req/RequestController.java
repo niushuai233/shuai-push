@@ -1,6 +1,7 @@
 package cc.niushuai.project.shuaipush.req;
 
 import cc.niushuai.project.shuaipush.common.base.Result;
+import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSenderFactory;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
 import cn.hutool.core.util.StrUtil;
@@ -38,7 +39,12 @@ public class RequestController {
             return Result.error("sendKey不匹配, 请检查");
         }
 
-        MessageSenderFactory.get(message.getPlatform()).send(message);
+        String platform = message.getPlatform();
+        if (StrUtil.isEmpty(platform)) {
+            // 不传就全部来一遍
+            platform = PlatformEnum.ALL.getValue();
+        }
+        MessageSenderFactory.get(platform).send(message);
 
         return Result.success();
     }

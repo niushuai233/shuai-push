@@ -20,7 +20,11 @@ public enum PlatformEnum implements BaseEnum<String, PlatformEnum> {
     /**
      * 企业微信
      */
-    Wework("Wework", "企业微信");
+    Wework("Wework", "企业微信"),
+    /**
+     * 全部来一遍
+     */
+    ALL("all", "全部来一遍");
 
     /**
      * key

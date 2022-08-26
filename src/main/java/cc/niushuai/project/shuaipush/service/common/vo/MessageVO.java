@@ -19,7 +19,6 @@ public class MessageVO {
     /**
      * 推送的平台
      */
-    @NotBlank(message = "platform 推送平台不能为空")
     private String platform;
 
     /**
