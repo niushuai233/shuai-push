@@ -24,9 +24,9 @@ public class MessageVO {
     /**
      * 消息类型 默认为text
      *
-     * @see
+     * @see MessageTypeEnum
      */
-    private String messageType = MessageTypeEnum.Text.getValue();
+    private String messageType;
 
     /**
      * 消息内容
@@ -37,5 +37,5 @@ public class MessageVO {
     /**
      * 接收人 默认为@all
      */
-    private String toUser = "@all";
+    private String toUser;
 }

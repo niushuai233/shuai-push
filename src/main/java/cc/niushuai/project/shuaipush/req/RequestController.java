@@ -1,6 +1,8 @@
 package cc.niushuai.project.shuaipush.req;
 
 import cc.niushuai.project.shuaipush.common.base.Result;
+import cc.niushuai.project.shuaipush.common.exception.BusinessException;
+import cc.niushuai.project.shuaipush.service.common.enums.MessageTypeEnum;
 import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSenderFactory;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
@@ -17,7 +19,7 @@ import javax.validation.Valid;
  * @date 2022/8/4 17:53
  */
 @RestController
-@RequestMapping
+@RequestMapping("/")
 public class RequestController {
 
     @Value("${push.sendKey:}")
@@ -33,19 +35,34 @@ public class RequestController {
      * @return: {@link Result<?>} 响应体
      */
     @PostMapping("/send/{sendKey}")
-    public Result<?> index(@PathVariable("sendKey") String key, @Valid @RequestBody MessageVO message) {
+    public Result<?> send(@PathVariable("sendKey") String key, @Valid @RequestBody MessageVO message) {
 
-        if (!StrUtil.equals(key, sendKey)) {
-            return Result.error("sendKey不匹配, 请检查");
-        }
+        this.verifySendKey(key);
 
         String platform = message.getPlatform();
         if (StrUtil.isEmpty(platform)) {
             // 不传就全部来一遍
             platform = PlatformEnum.ALL.getValue();
         }
+        if (StrUtil.isEmpty(message.getMessageType())) {
+            message.setMessageType(MessageTypeEnum.Text.getValue());
+        }
         MessageSenderFactory.get(platform).send(message);
 
         return Result.success();
+    }
+
+    /**
+     * 校验key是否一致
+     *
+     * @param key sendKey
+     * @author niushuai
+     * @date: 2022/8/31 17:43
+     */
+    private void verifySendKey(String key) {
+        if (StrUtil.equals(key, sendKey)) {
+            return;
+        }
+        throw new BusinessException("sendKey[{}]不匹配, 请检查", key);
     }
 }
