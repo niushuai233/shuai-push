@@ -2,6 +2,8 @@ package cc.niushuai.project.shuaipush.common.exception;
 
 import cc.niushuai.project.shuaipush.common.base.Result;
 import cc.niushuai.project.shuaipush.common.base.ResultCode;
+import cn.hutool.core.text.StrPool;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -61,7 +63,7 @@ public class GlobalExceptionHandler {
         allErrors.forEach(error -> message.append("[" + error.getDefaultMessage() + "], "));
 
         String trim = message.toString().trim();
-        if (trim.endsWith(",")) {
+        if (trim.endsWith(StrPool.COMMA)) {
             trim = trim.substring(0, trim.length() - 1);
         }
 
