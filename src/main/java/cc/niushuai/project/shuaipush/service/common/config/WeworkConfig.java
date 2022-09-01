@@ -1,8 +1,5 @@
 package cc.niushuai.project.shuaipush.service.common.config;
 
-import cc.niushuai.project.shuaipush.common.exception.BusinessException;
-import cc.niushuai.project.shuaipush.common.util.ValidatorUtil;
-import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -27,16 +24,4 @@ public class WeworkConfig {
     private Long appId;
     private String toUser;
 
-    /**
-     * 验证配置文件准确性
-     *
-     * @author niushuai
-     * @date: 2022/8/5 14:01
-     */
-    public void verify() {
-        String validate = ValidatorUtil.validate(this);
-        if (StrUtil.isNotEmpty(validate)) {
-            throw new BusinessException(validate);
-        }
-    }
 }
