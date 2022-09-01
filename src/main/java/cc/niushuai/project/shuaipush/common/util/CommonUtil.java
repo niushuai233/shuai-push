@@ -11,6 +11,10 @@ import cn.hutool.core.util.StrUtil;
  */
 public class CommonUtil {
 
+    public static boolean WEIXIN_ENABLE = false;
+    public static boolean WEWORK_ENABLE = false;
+
+
     public static void nullable(Object data, String message) {
         if (null == data || (data instanceof String && StrUtil.isEmpty(data.toString()))) {
             throw new BusinessException(message);

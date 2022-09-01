@@ -79,6 +79,7 @@ public class PushConfig {
     private void verifyWework() {
         CommonUtil.nullable(wework, "请补充企业微信应用参数");
         this.verify(wework);
+        CommonUtil.WEWORK_ENABLE = true;
     }
 
     /**
@@ -90,6 +91,7 @@ public class PushConfig {
     private void verifyWeixin() {
         CommonUtil.nullable(weixin, "请补充微信公众号参数");
         this.verify(weixin);
+        CommonUtil.WEIXIN_ENABLE = true;
     }
 
     /**

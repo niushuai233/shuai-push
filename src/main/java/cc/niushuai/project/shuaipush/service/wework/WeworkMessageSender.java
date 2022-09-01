@@ -1,5 +1,7 @@
 package cc.niushuai.project.shuaipush.service.wework;
 
+import cc.niushuai.project.shuaipush.common.exception.BusinessException;
+import cc.niushuai.project.shuaipush.common.util.CommonUtil;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSender;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
 import cc.niushuai.project.shuaipush.service.wework.api.WeworkApiService;
@@ -30,6 +32,10 @@ public class WeworkMessageSender implements MessageSender {
      */
     @Override
     public void send(MessageVO message) {
+
+        if (!CommonUtil.WEWORK_ENABLE) {
+            throw new BusinessException("企业微信推送未开启");
+        }
 
         weworkApiService.sendAppMessage(message);
 
