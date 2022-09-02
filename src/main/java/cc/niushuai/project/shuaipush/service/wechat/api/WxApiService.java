@@ -49,9 +49,7 @@ public class WxApiService implements ApiService {
 
         WxMpResp wxMpResp = RestTemplateUtil.postJson(ApiConstant.constructWeixinUrl(ApiConstant.Weixin.Message.Template_Send, this.getAccessToken(), getWeixin()), request, WxMpResp.class);
 
-        if (!wxMpResp.isSuccess()) {
-            throw new BusinessException("微信公众号发送模板消息失败" + ", 错误码:[" + wxMpResp.getErrorCode() + "], " + wxMpResp.getErrorMessage());
-        }
+        dealResponse("微信公众号发送模板消息失败", wxMpResp);
     }
 
 
@@ -66,6 +64,8 @@ public class WxApiService implements ApiService {
 
         // 从api取
         WxMpResp wxMpResp = RestTemplateUtil.get(ApiConstant.constructWeixinUrl(ApiConstant.Weixin.Auth.Get_Token, null, getWeixin()), WxMpResp.class);
+        dealResponse("微信公众号获取AccessToken失败", wxMpResp);
+
         // 重新 放入缓存
         CacheManager.getDefault().put(ApiConstant.Weixin.Keys.ACCESS_TOKEN, wxMpResp.getAccessToken(), wxMpResp.getExpiresIn() * 1000L);
 

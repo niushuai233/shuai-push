@@ -1,8 +1,10 @@
 package cc.niushuai.project.shuaipush.service.common;
 
+import cc.niushuai.project.shuaipush.common.exception.BusinessException;
 import cc.niushuai.project.shuaipush.service.common.config.PushConfig;
 import cc.niushuai.project.shuaipush.service.common.config.WeworkConfig;
 import cc.niushuai.project.shuaipush.service.common.config.WxConfig;
+import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 
 /**
@@ -54,7 +56,7 @@ public interface ApiService {
     default WeworkConfig getWework() {
         return getPushConfig().getWework();
     }
-    
+
     /**
      * 获取微信公众号配置信息
      *
@@ -64,5 +66,28 @@ public interface ApiService {
      */
     default WxConfig getWeixin() {
         return getPushConfig().getWeixin();
+    }
+
+    /**
+     * 统一处理response
+     *
+     * @param title 消息类型
+     * @param t     返回对象
+     * @author niushuai
+     * @date: 2022/9/2 9:39
+     */
+    default <T> void dealResponse(String title, T t) {
+        boolean isSuccess = false;
+        Object errorCode, errorMessage;
+        try {
+            isSuccess = (boolean) ReflectUtil.getMethodByName(t.getClass(), "isSuccess").invoke(t);
+            errorCode = ReflectUtil.getFieldValue(t, "errorCode");
+            errorMessage = ReflectUtil.getFieldValue(t, "errorMessage");
+        } catch (Exception e) {
+            throw new BusinessException("处理响应结果异常: {}", e.getMessage());
+        }
+        if (!isSuccess) {
+            throw new BusinessException(title + ", 错误码:[" + errorCode + "], " + errorMessage);
+        }
     }
 }

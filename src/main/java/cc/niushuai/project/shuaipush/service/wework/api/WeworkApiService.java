@@ -2,7 +2,6 @@ package cc.niushuai.project.shuaipush.service.wework.api;
 
 import cc.niushuai.project.shuaipush.common.base.BaseEnum;
 import cc.niushuai.project.shuaipush.common.cache.CacheManager;
-import cc.niushuai.project.shuaipush.common.exception.BusinessException;
 import cc.niushuai.project.shuaipush.common.util.CommonUtil;
 import cc.niushuai.project.shuaipush.common.util.RestTemplateUtil;
 import cc.niushuai.project.shuaipush.service.common.ApiConstant;
@@ -47,7 +46,7 @@ public class WeworkApiService implements ApiService {
 
         // 从api取
         WeworkResp weworkResp = RestTemplateUtil.get(ApiConstant.constructWeworkUrl(ApiConstant.Wework.Auth.Get_Token, null, getWework()), WeworkResp.class);
-        parseResponse("获取Access_Token失败", weworkResp);
+        dealResponse("企业微信获取AccessToken失败", weworkResp);
         // 重新 放入缓存
         CacheManager.getDefault().put(Keys.ACCESS_TOKEN, weworkResp.getAccessToken(), weworkResp.getExpiresIn() * 1000L);
 
@@ -87,12 +86,7 @@ public class WeworkApiService implements ApiService {
         }
 
         WeworkResp weworkResp = RestTemplateUtil.postJson(ApiConstant.constructWeworkUrl(Message.Send, this.getAccessToken(), getWework()), weworkAppMessage, WeworkResp.class);
-        parseResponse("企业微信应用消息推送失败", weworkResp);
+        dealResponse("企业微信应用发送消息失败", weworkResp);
     }
 
-    private void parseResponse(String title, WeworkResp weworkResp) {
-        if (!weworkResp.isSuccess()) {
-            throw new BusinessException(title + ", 错误码:[" + weworkResp.getErrorCode() + "], " + weworkResp.getErrorMessage());
-        }
-    }
 }
