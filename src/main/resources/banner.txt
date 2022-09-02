@@ -8,5 +8,5 @@ $$\   $$ |$$ |  $$ |$$ |  $$ |$$  __$$ |$$ |        $$ |      $$ |  $$ | \____$$
  \______/ \__|  \__| \______/  \_______|\__|        \__|       \______/ \_______/ \__|  \__|
 
 ${AnsiColor.BLACK} Spring Boot.version: ${AnsiColor.BRIGHT_GREEN} ${spring-boot.version}
-${AnsiColor.BLACK} Application.version: ${AnsiColor.BRIGHT_GREEN} 0.0.1
+${AnsiColor.BLACK} Application.version: ${AnsiColor.BRIGHT_GREEN} 0.1.0
 ${AnsiColor.BLACK} 开源地址：https://github.com/niushuai233/shuai-push

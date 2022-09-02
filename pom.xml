@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>cc.niushuai.project</groupId>
 	<artifactId>shuai-push</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.0</version>
 	<name>shuai-push</name>
 	<description>消息推送服务</description>
 	<properties>
