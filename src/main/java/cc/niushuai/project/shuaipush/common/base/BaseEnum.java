@@ -36,7 +36,7 @@ public interface BaseEnum<K, V extends Enum<?>> {
             V[] enumConstants = clazz.getEnumConstants();
             for (V v : enumConstants) {
                 Object invoke = clazz.getMethod("getValue").invoke(v);
-                if (invoke.toString().equals(value.toString())) {
+                if (invoke.toString().equalsIgnoreCase(value.toString())) {
                     return v;
                 }
             }

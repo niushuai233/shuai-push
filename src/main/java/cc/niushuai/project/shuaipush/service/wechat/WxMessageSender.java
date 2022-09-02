@@ -1,28 +1,28 @@
-package cc.niushuai.project.shuaipush.service.wework;
+package cc.niushuai.project.shuaipush.service.wechat;
 
 import cc.niushuai.project.shuaipush.common.exception.BusinessException;
 import cc.niushuai.project.shuaipush.common.util.CommonUtil;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSender;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
 import cc.niushuai.project.shuaipush.service.common.vo.TemplateMessageVO;
-import cc.niushuai.project.shuaipush.service.wework.api.WeworkApiService;
+import cc.niushuai.project.shuaipush.service.wechat.api.WxApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 /**
- * 企业微信应用消息推送
+ * 微信公众号消息
  *
  * @author niushuai
- * @date 2022/8/5 11:41
+ * @date 2022/9/1 15:25
  */
 @Slf4j
 @Component
-public class WeworkMessageSender implements MessageSender {
+public class WxMessageSender implements MessageSender {
 
     @Resource
-    private WeworkApiService weworkApiService;
+    private WxApiService wxApiService;
 
     /**
      * 发送消息
@@ -34,16 +34,14 @@ public class WeworkMessageSender implements MessageSender {
     @Override
     public void send(MessageVO message) {
 
-        if (!CommonUtil.WEWORK_ENABLE) {
-            throw new BusinessException("企业微信推送未开启");
-        }
-
-        weworkApiService.sendAppMessage(message);
-
     }
 
     @Override
     public void templateSend(TemplateMessageVO templateMessage) {
+        if (!CommonUtil.WEIXIN_ENABLE) {
+            throw new BusinessException("微信公众号推送未开启");
+        }
 
+        wxApiService.sendTemplateMessage(templateMessage);
     }
 }

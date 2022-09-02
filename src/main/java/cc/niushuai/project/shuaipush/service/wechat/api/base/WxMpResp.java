@@ -1,4 +1,4 @@
-package cc.niushuai.project.shuaipush.service.wework.api.base;
+package cc.niushuai.project.shuaipush.service.wechat.api.base;
 
 import cc.niushuai.project.shuaipush.service.common.base.Successful;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,17 +6,14 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 企业微信接口响应值
+ * 企业微信响应
  *
  * @author niushuai
- * @date 2022/8/5 15:06
+ * @date 2022/9/1 17:11
  */
 @Data
 @Accessors(chain = true)
-public class WeworkResp implements Successful {
-
-    @JsonProperty("msgid")
-    private String msgId;
+public class WxMpResp implements Successful {
 
     @JsonProperty("errcode")
     private Long errorCode;
@@ -30,8 +27,14 @@ public class WeworkResp implements Successful {
     @JsonProperty("expires_in")
     private Long expiresIn;
 
+    /**
+     * 是否成功
+     *
+     * @author niushuai
+     * @date: 2022/9/1 17:13
+     */
     @Override
     public boolean isSuccess() {
-        return this.getErrorCode() == 0;
+        return null == this.getErrorCode() || this.getErrorCode() == 0;
     }
 }

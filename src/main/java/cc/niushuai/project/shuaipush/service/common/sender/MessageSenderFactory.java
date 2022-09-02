@@ -4,6 +4,7 @@ import cc.niushuai.project.shuaipush.common.base.BaseEnum;
 import cc.niushuai.project.shuaipush.common.exception.BusinessException;
 import cc.niushuai.project.shuaipush.service.AllMessageSender;
 import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
+import cc.niushuai.project.shuaipush.service.wechat.WxMessageSender;
 import cc.niushuai.project.shuaipush.service.wework.WeworkMessageSender;
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ public class MessageSenderFactory {
     private static final Map<PlatformEnum, MessageSender> senders = new HashMap<>();
 
     static {
+        put(PlatformEnum.Weixin, WxMessageSender.class);
         put(PlatformEnum.Wework, WeworkMessageSender.class);
         put(PlatformEnum.ALL, AllMessageSender.class);
     }

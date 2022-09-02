@@ -16,7 +16,7 @@ public enum PlatformEnum implements BaseEnum<String, PlatformEnum> {
     /**
      * 微信公众号
      */
-    WeChat("WeChat", "微信公众号"),
+    Weixin("Weixin", "微信公众号"),
     /**
      * 企业微信
      */

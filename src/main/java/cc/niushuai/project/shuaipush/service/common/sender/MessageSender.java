@@ -1,6 +1,7 @@
 package cc.niushuai.project.shuaipush.service.common.sender;
 
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
+import cc.niushuai.project.shuaipush.service.common.vo.TemplateMessageVO;
 
 /**
  * 发送消息接口
@@ -19,4 +20,6 @@ public interface MessageSender {
      * @date: 2022/8/5 11:40
      */
     void send(MessageVO message);
+
+    void templateSend(TemplateMessageVO templateMessage);
 }

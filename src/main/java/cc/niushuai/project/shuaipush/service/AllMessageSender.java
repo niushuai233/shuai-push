@@ -3,6 +3,7 @@ package cc.niushuai.project.shuaipush.service;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSender;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSenderFactory;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
+import cc.niushuai.project.shuaipush.service.common.vo.TemplateMessageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -34,5 +35,10 @@ public class AllMessageSender implements MessageSender {
                         log.error("发送失败: {}, {}", item.getClass().getCanonicalName(), e.getMessage(), e);
                     }
                 });
+    }
+
+    @Override
+    public void templateSend(TemplateMessageVO templateMessage) {
+
     }
 }

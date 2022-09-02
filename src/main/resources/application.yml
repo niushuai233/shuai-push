@@ -34,10 +34,18 @@ spring:
 # 自定义配置
 push:
   sendKey: ${sendKey:}
+  enableService: ${enableService:all}
+  # 企业微信内部应用
   wework:
     # 企业id
-    corpId: ${corpId:}
-    corpSecret: ${corpSecret:}
-    appId: ${appId:}
-    toUser: ${toUser:}
-
+    corpId: ${wxCpCorpId:}
+    # 企业秘钥
+    corpSecret: ${wxCpCorpSecret:}
+    # 企业内部应用id
+    appId: ${wxCpAppId:}
+  # 微信公众号
+  weixin:
+    # 微信公众号id
+    appid: ${wxAppId:}
+    # 微信公众号秘钥
+    appSecret: ${wxAppSecret:}

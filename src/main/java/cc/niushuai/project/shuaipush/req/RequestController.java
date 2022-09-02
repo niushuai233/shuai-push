@@ -6,6 +6,7 @@ import cc.niushuai.project.shuaipush.service.common.enums.MessageTypeEnum;
 import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSenderFactory;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
+import cc.niushuai.project.shuaipush.service.common.vo.TemplateMessageVO;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,22 @@ public class RequestController {
             message.setMessageType(MessageTypeEnum.Text.getValue());
         }
         MessageSenderFactory.get(platform).send(message);
+
+        return Result.success();
+    }
+
+    /**
+     * 发送模板消息
+     *
+     * @param templateMessage 模板消息
+     * @author niushuai
+     * @date: 2022/8/31 17:54
+     * @return: {@link Result<?>}
+     */
+    @PostMapping("/templateSend/{sendKey}")
+    public Result<?> templateSend(@PathVariable("sendKey") String key, @Valid @RequestBody TemplateMessageVO templateMessage) {
+
+        MessageSenderFactory.get(templateMessage.getPlatform()).templateSend(templateMessage);
 
         return Result.success();
     }
