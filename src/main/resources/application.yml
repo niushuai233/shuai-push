@@ -5,6 +5,7 @@ logging:
   level:
     root: info
     cc.niushuai: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
   file:
     path: ${LOG_PATH:.}
     name: @artifactId@-@version@.log
@@ -16,7 +17,7 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: H2
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
   h2:

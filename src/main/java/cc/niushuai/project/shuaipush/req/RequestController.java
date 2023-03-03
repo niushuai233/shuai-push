@@ -1,5 +1,7 @@
 package cc.niushuai.project.shuaipush.req;
 
+import cc.niushuai.project.shuaipush.biz.sms.entity.NsSms;
+import cc.niushuai.project.shuaipush.biz.sms.repository.SmsRepository;
 import cc.niushuai.project.shuaipush.common.base.Result;
 import cc.niushuai.project.shuaipush.common.exception.BusinessException;
 import cc.niushuai.project.shuaipush.service.common.enums.MessageTypeEnum;
@@ -7,11 +9,14 @@ import cc.niushuai.project.shuaipush.service.common.enums.PlatformEnum;
 import cc.niushuai.project.shuaipush.service.common.sender.MessageSenderFactory;
 import cc.niushuai.project.shuaipush.service.common.vo.MessageVO;
 import cc.niushuai.project.shuaipush.service.common.vo.TemplateMessageVO;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Date;
 
 /**
  * 请求统一入口
@@ -26,6 +31,9 @@ public class RequestController {
     @Value("${push.sendKey:}")
     private String sendKey;
 
+    @Resource
+    private SmsRepository smsRepository;
+
     /**
      * 发送消息
      *
@@ -37,6 +45,8 @@ public class RequestController {
      */
     @PostMapping("/send/{sendKey}")
     public Result<?> send(@PathVariable("sendKey") String key, @Valid @RequestBody MessageVO message) {
+
+        smsRepository.save(new NsSms().setId(IdUtil.getSnowflakeNextId()).setMessage(message.getMessage()).setCreateTime(new Date()));
 
         this.verifySendKey(key);
 
