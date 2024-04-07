@@ -12,9 +12,9 @@ import cn.hutool.core.util.StrUtil;
  */
 public interface ApiConstant {
 
-    String CORP_ID = "ID";
+    String CORP_ID = "CORP_ID";
     String CORP_APP_ID = "CORP_APP_ID";
-    String CORP_SECRET = "SECRET";
+    String CORP_SECRET = "CORP_SECRET";
     String ACCESS_TOKEN = "ACCESS_TOKEN";
     String WX_APP_ID = "APPID";
     String WX_APP_SECRET = "APPSECRET";
@@ -49,7 +49,7 @@ public interface ApiConstant {
             /**
              * 获取token
              */
-            String Get_Token = "/gettoken?corpid=ID&corpsecret=SECRET";
+            String Get_Token = "/gettoken?corpid=CORP_ID&corpsecret=CORP_SECRET";
         }
 
         /**
